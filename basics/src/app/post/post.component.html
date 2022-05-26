@@ -1,0 +1,6 @@
+<p>post works!</p>
+
+<img [src]="postImg" (click)="imgSelected.emit(postImg)">
+<!-- provided by new EventEmitter object -->
+
+<ng-content></ng-content> <!-- it will search for an content inserted inside our component -->
