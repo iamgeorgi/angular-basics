@@ -8,20 +8,26 @@ import { Component } from "@angular/core";
   styleUrls: ['./app.component.scss'],
   // styles: ['']
 })
+
+
+// inside the class we store the state of the app 
 export class AppComponent {
-  name = 'Luis' 
-  // we can reuse this componenet, if value of name changes in one component, it won't change in other components
-  imgURL = 'https://i.picsum.photos/id/10/2500/1667.jpg'
+  newMemberName = "";
+  errorMessage = "";
+  members: string[] = []; // we specify that members will be array of strings
+  
+  addMember() {
+    if (!this.newMemberName) {
+      this.errorMessage = "Name cant't be empty";
+      return;
+    }
 
-  getName() {
-    return this.name;
+    this.errorMessage = "";
+    this.members.push(this.newMemberName);
+    this.newMemberName = "";
   }
 
-  changeImage(e: KeyboardEvent) {
-    this.imgURL = (e.target as HTMLInputElement).value // target object is of EventTarget type so we apply type assertion and change it as HTMLInputElement
-  }
-
-  logImg(event: string) {
-    console.log(event);
+  userInput(event: string) {
+    this.newMemberName = event;
   }
 }

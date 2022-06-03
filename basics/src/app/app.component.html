@@ -1,11 +1,29 @@
-<p>Hello World!</p>
-<input (keyup)="changeImage($event)" [value]="imgURL">
-
-<app-post [postImg]="imgURL" (imgSelected)="logImg($event)">
-  <p>Some caption</p> 
-  <!-- content projection, it will be processed by the parent component -->
-</app-post>
-
-<p>Hello {{ name.toUpperCase() }}!</p>
-<p>Hello {{ getName() }}!</p>
-<p>{{ 15 + 13 }}</p>
+<!-- This is where is our component structure -->
+<div class="container">
+  <div class="ui card">
+    <h1>Team Generator</h1>
+    <ul class="list">
+      <li *ngFor="let member of members">{{ member }}</li>
+      <!-- ngFor is structural directive -->
+    </ul>
+    <div class="add-members-container">
+      <!-- <input type="text" placeholder="Name" (keyup)="userInput($event)" /> -->
+      <input
+        #addMemberInput 
+        type="text" 
+        placeholder="Name" 
+        (input)="userInput(addMemberInput.value)" 
+        [value]="newMemberName"
+        [class]="newMemberName" 
+      />
+      <!-- it will take the value from addMemberInput   -->
+      <!-- when we put square brackets to [value] we say that we want to use attribute directive as a value -->
+      <button (click)="addMember()">Add</button>
+    </div>
+    <div class="input-container">
+      <input type="text" placeholder="# of teams">
+      <button>Generate</button>
+    </div>
+    <p *ngIf="errorMessage" class="errorMessage">{{ errorMessage }}</p>
+  </div>
+</div>
